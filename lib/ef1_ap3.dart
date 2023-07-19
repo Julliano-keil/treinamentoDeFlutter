@@ -40,6 +40,8 @@ class _MyWidgetState extends State<MyWidget> {
   var acertos = Random().nextInt(4);
   var tentativas = 0;
 //
+
+  var chances = 2;
   int vitoria = 0;
   var derrotas = 0;
   var corfundo = Colors.purple;
@@ -54,101 +56,131 @@ class _MyWidgetState extends State<MyWidget> {
           title: Text(palavra),
         ),
         body: Center(
-          child: Column(children: [
-            ElevatedButton(
-              child: const Text('qual o botao correto N°1 ?'),
-              onPressed: () {
-                setState(() {
-                  if (acertos == 0 && tentativas != 2) {
-                    palavra = 'parabens voce acertou ';
-                    corfundo = Colors.green;
-                    ThemeData.dark()
-                        .copyWith(scaffoldBackgroundColor: corfundo);
-                    if (tentativas < 2) {
-                      vitoria++;
-                    }
-                  } else {
-                    palavra = 'voce errou sinto muito';
-                    corfundo = Colors.red;
-                    ThemeData().copyWith(scaffoldBackgroundColor: corfundo);
-                    tentativas++;
-                    if (tentativas < 2) {
-                      derrotas++;
-                    }
-                  }
-                });
-              },
-            ),
-            ElevatedButton(
-              child: const Text('qual o botao correto N°2 ?'),
-              onPressed: () {
-                setState(() {
-                  if (acertos == 1 && tentativas != 2) {
-                    palavra = 'parabens voce acertou ';
-                    corfundo = Colors.green;
-                    ThemeData.dark()
-                        .copyWith(scaffoldBackgroundColor: corfundo);
-                    if (tentativas < 2) {
-                      vitoria++;
-                    }
-                  } else {
-                    palavra = 'voce errou sinto muito';
-                    corfundo = Colors.red;
-                    ThemeData.dark()
-                        .copyWith(scaffoldBackgroundColor: corfundo);
-                    tentativas++;
-                    if (tentativas < 2) {
-                      derrotas++;
-                    }
-                  }
-                });
-              },
-            ),
-            ElevatedButton(
-              child: const Text('qual o botao correto N°3 ?'),
-              onPressed: () {
-                setState(() {
-                  if (acertos == 2 && tentativas != 2) {
-                    palavra = 'parabens voce acertou ';
-                    corfundo = Colors.green;
-                    ThemeData.dark()
-                        .copyWith(scaffoldBackgroundColor: corfundo);
-                    if (tentativas < 2) {
-                      vitoria++;
-                    }
-                  } else {
-                    palavra = 'voce errou sinto muito';
-                    corfundo = Colors.red;
-                    ThemeData.dark()
-                        .copyWith(scaffoldBackgroundColor: corfundo);
-                    tentativas++;
-                    if (tentativas < 2) {
-                      derrotas++;
-                    }
-                  }
-                });
-              },
-            ),
-            ElevatedButton(
-              child: const Text('reiniciar'),
-              onPressed: () {
-                setState(() {
-                  corfundo = Colors.purple;
-                  ThemeData.dark().copyWith(scaffoldBackgroundColor: corfundo);
-
-                  tentativas = 0;
-                  acertos = Random().nextInt(3);
-                  debugPrint('oss : $acertos');
-                });
-              },
-            ),
-            Column(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Vitorias : $vitoria \n'),
-                Text('Derrotas : $derrotas'),
+                ElevatedButton(
+                  child: const Text('qual o botao correto N°1 ?'),
+                  onPressed: () {
+                    setState(() {
+                      if (acertos == 0 && tentativas != 2 && chances > 0) {
+                        palavra = 'parabens voce acertou ';
+                        corfundo = Colors.green;
+                        ThemeData.dark()
+                            .copyWith(scaffoldBackgroundColor: corfundo);
+                        if (tentativas < 2) {
+                          vitoria++;
+                        }
+                      } else {
+                        palavra = 'voce errou sinto muito';
+                        corfundo = Colors.red;
+                        ThemeData().copyWith(scaffoldBackgroundColor: corfundo);
+                        tentativas++;
+                        if (tentativas < 2) {
+                          derrotas++;
+                        }
+                        // verifica se as chances
+                        if (chances > 0) {
+                          chances--;
+                        } else {
+                          palavra = 'voce nao tem mais chances';
+                        }
+                      }
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  child: const Text('qual o botao correto N°2 ?'),
+                  onPressed: () {
+                    setState(() {
+                      if (acertos == 1 && tentativas != 2 && chances > 0) {
+                        palavra = 'parabens voce acertou ';
+                        corfundo = Colors.green;
+                        ThemeData.dark()
+                            .copyWith(scaffoldBackgroundColor: corfundo);
+                        if (tentativas < 2) {
+                          vitoria++;
+                        }
+                      } else {
+                        palavra = 'voce errou sinto muito';
+                        corfundo = Colors.red;
+                        ThemeData.dark()
+                            .copyWith(scaffoldBackgroundColor: corfundo);
+                        tentativas++;
+                        if (tentativas < 2) {
+                          derrotas++;
+                        }
+                        if (chances > 0) {
+                          chances--;
+                        } else {
+                          palavra = 'voce nao tem mais chances';
+                        }
+                      }
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  child: const Text('qual o botao correto N°3 ?'),
+                  onPressed: () {
+                    setState(() {
+                      if (acertos == 2 && tentativas != 2 && chances > 0) {
+                        palavra = 'parabens voce acertou ';
+                        corfundo = Colors.green;
+                        ThemeData.dark()
+                            .copyWith(scaffoldBackgroundColor: corfundo);
+                        if (tentativas < 2) {
+                          vitoria++;
+                        }
+                      } else {
+                        palavra = 'voce errou sinto muito';
+                        corfundo = Colors.red;
+                        ThemeData.dark()
+                            .copyWith(scaffoldBackgroundColor: corfundo);
+                        tentativas++;
+                        if (tentativas < 2) {
+                          derrotas++;
+                        }
+                        if (chances > 0) {
+                          chances--;
+                        } else {
+                          palavra = 'voce nao tem mais chances';
+                        }
+                      }
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  child: const Text('reiniciar '),
+                  onPressed: () {
+                    setState(() {
+                      corfundo = Colors.purple;
+                      ThemeData.dark()
+                          .copyWith(scaffoldBackgroundColor: corfundo);
+                      palavra = '=>';
+                      tentativas = 0;
+                      chances = 2;
+                      acertos = Random().nextInt(3);
+                      debugPrint('oss : $acertos ');
+                    });
+                  },
+                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text('Vitorias : $vitoria'),
+                      Text('Derrotas : $derrotas'),
+                      Text('chances : $chances'),
+                    ]),
+                const Column(
+                  children: [
+                    Text(
+                        '\n voce tem duas(2) chances para acertar \n,caso o nao consiga reinicie o game')
+                  ],
+                )
               ],
             ),
-          ]),
+          ),
         ),
       ),
     );
