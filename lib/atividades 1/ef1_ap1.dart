@@ -16,6 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var cor = Colors.purple;
+
   final random = Random();
   @override
   Widget build(BuildContext context) {
