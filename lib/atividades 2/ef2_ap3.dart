@@ -18,6 +18,7 @@ class _MyAppState extends State<MyApp> {
 
   var quadrado = true;
 
+  String get palavra2 => quadrado ? 'quadrado !!' : 'Circulo !!';
   var cor = Colors.purple;
 
   String get palavra =>
@@ -34,7 +35,7 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
                     child: Text(palavra),
@@ -71,7 +72,7 @@ class _MyAppState extends State<MyApp> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(150),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -86,6 +87,12 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
               ),
+              Container(
+                child: Text(
+                  palavra2,
+                  style: TextStyle(color: cor, fontSize: 25),
+                ),
+              )
             ],
           ),
         ),
