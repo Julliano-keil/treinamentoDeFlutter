@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -87,6 +87,7 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
               ),
+              // ignore: avoid_unnecessary_containers
               Container(
                 child: Text(
                   palavra2,
