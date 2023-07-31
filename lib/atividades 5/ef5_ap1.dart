@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 void main() async {
-  runApp(const MyApp());
+  // runApp(const MyApp());
 }
 
 class Produto {
@@ -32,7 +32,7 @@ class Produto {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp(
         home: Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: const Color.fromARGB(255, 38, 44, 48),
       appBar: AppBar(
         title: const Text('lista de produtos'),
       ),
@@ -80,15 +80,22 @@ class _MyAppState extends State<MyApp> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: Container(
-                      width: 70,
-                      child: Image.network(
-                        snapshot.data[index].imagem,
-                        fit: BoxFit.cover,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 6.0, color: const Color(0xFFFFFFFF))),
+                      child: SizedBox(
+                        width: 70,
+                        child: Image.network(
+                          snapshot.data[index].imagem,
+                        ),
                       ),
                     ),
-                    title: Text('${snapshot.data[index].title}\n'),
+                    title: Text(
+                      '${snapshot.data[index].title}\n',
+                      style: const TextStyle(color: Colors.white),
+                    ),
                     onTap: () {
-                      print("Imagem URL: ${snapshot.data[index].imagem}");
+                      debugPrint("Imagem URL: ${snapshot.data[index].imagem}");
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -119,7 +126,7 @@ class VisualizaImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 43, 14, 48),
+        backgroundColor: const Color.fromARGB(255, 57, 3, 70),
         appBar: AppBar(
           title: const Text('animal celecionado'),
           leading: IconButton(
@@ -129,7 +136,13 @@ class VisualizaImage extends StatelessWidget {
             },
           ),
         ),
-        body: Center(child: Image.network(image!)),
+        body: Container(
+          decoration: BoxDecoration(
+              border: Border.all(width: 6.0, color: const Color(0xFFFFFFFF))),
+          child: Center(
+            child: Image.network(image!),
+          ),
+        ),
       ),
     );
   }
