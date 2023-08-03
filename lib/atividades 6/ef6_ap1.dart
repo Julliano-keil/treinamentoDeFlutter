@@ -79,57 +79,50 @@ class TelaInicial extends StatelessWidget {
         backgroundColor: Colors.purple,
         appBar:
             AppBar(title: const Center(child: Text('Cadastros e listagem'))),
-        body: Center(
-          child:
-              Consumer<EstadoListaDePessoas>(builder: (context, value, child) {
-            return Container(
-              width: 1080,
-              height: 1920,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Stack(children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10), // Define o raio da borda do botão
-                          ),
+        body: Consumer<EstadoListaDePessoas>(builder: (context, value, child) {
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Stack(children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Text('ver lista e atualizar'),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ListaDePessoa()),
-                          );
-                        },
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10), // Define o raio da borda do botão
-                          ),
+                      child: const Text('cadastrar Usuario'),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AddPessoas()),
+                        );
+                      },
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Text('cadastrar Usuario'),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AddPessoas()),
-                          );
-                        },
                       ),
-                    ],
-                  ),
-                ]),
-              ),
-            );
-          }),
-        ),
+                      child: const Text('Lista e Ediçao '),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ListaDePessoa()),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ]),
+            ),
+          );
+        }),
       ),
     );
   }
@@ -159,7 +152,7 @@ class _ListaDePessoaState extends State<ListaDePessoa> {
               return ListTile(
                 title: Text(pessoa.nome!),
                 subtitle: Text(pessoa.email!),
-                trailing: const Icon(Icons.chevron_right),
+                trailing: const Icon(Icons.backspace_outlined),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -211,97 +204,47 @@ class _EditarPessoaState extends State<EditarPessoa> {
             key: _formulario,
             child: Column(
               children: [
-                Card(
-                  color: Colors.purple,
-                  child: TextFormField(
-                    initialValue: _pessoa.nome,
-                    onChanged: (value) {
-                      setState(() {
-                        _pessoa.nome = value;
-                      });
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, insira um nome válido';
-                      }
-                      return null;
-                    },
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      labelText: 'Nome',
-                      labelStyle: TextStyle(color: Colors.black, fontSize: 20),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                //formulario de alteraçao
+                Push15(
+                  initialvalue: _pessoa.nome,
+                  labelText: 'Nome',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira dado válido!';
+                    }
+                    return null;
+                  },
                 ),
-                Card(
-                  color: Colors.purple,
-                  child: TextFormField(
-                    initialValue: _pessoa.email,
-                    onChanged: (value) {
-                      setState(() {
-                        _pessoa.email = value;
-                      });
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, insira um e-mail válido';
-                      }
-                      return null;
-                    },
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      labelStyle: TextStyle(color: Colors.black, fontSize: 20),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                Push15(
+                  initialvalue: _pessoa.email,
+                  labelText: 'Email',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira dado válido!';
+                    }
+                    return null;
+                  },
                 ),
-                Card(
-                  color: Colors.purple,
-                  child: TextFormField(
-                    initialValue: _pessoa.telefone,
-                    onChanged: (value) {
-                      setState(() {
-                        _pessoa.telefone = value;
-                      });
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, insira um telefone válido';
-                      }
-                      return null;
-                    },
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      labelText: 'Telefone',
-                      labelStyle: TextStyle(color: Colors.black, fontSize: 20),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                Push15(
+                  initialvalue: _pessoa.telefone,
+                  labelText: 'Telefone',
+                  keybord: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira dado válido!';
+                    }
+                    return null;
+                  },
                 ),
-                Card(
-                  color: Colors.purple,
-                  child: TextFormField(
-                    initialValue: _pessoa.github,
-                    onChanged: (value) {
-                      setState(() {
-                        _pessoa.github = value;
-                      });
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, insira um nome de usuário do GitHub válido';
-                      }
-                      return null;
-                    },
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      labelText: 'GitHub',
-                      labelStyle: TextStyle(color: Colors.black, fontSize: 20),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                Push15(
+                  initialvalue: _pessoa.github,
+                  labelText: 'GitHub',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira dado válido!';
+                    }
+                    return null;
+                  },
                 ),
                 Card(
                   color: Colors.purple,
@@ -418,95 +361,56 @@ class _AddPessoasState extends State<AddPessoas> {
                       key: _formulario,
                       child: Column(
                         children: [
-                          Card(
-                            color: Colors.purple,
-                            child: TextFormField(
+                          //formulario de cadastro
+                          Push15(
                               controller: _nome,
-                              decoration: const InputDecoration(
-                                labelText: ' Nome',
-                                labelStyle: TextStyle(
-                                    color: Colors.black, fontSize: 20),
-                                border: OutlineInputBorder(),
-                              ),
+                              labelText: 'Nome',
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Por favor, insira dado valido ';
+                                  return 'Por favor, insira dado válido!';
                                 }
                                 return null;
                               },
                               onSaved: (value) {
                                 _nome.text = value ?? '';
-                              },
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          Card(
-                            color: Colors.purple,
-                            child: TextFormField(
+                              }),
+                          Push15(
                               controller: _email,
-                              decoration: const InputDecoration(
-                                labelText: ' Email',
-                                labelStyle: TextStyle(
-                                    color: Colors.black, fontSize: 20),
-                                border: OutlineInputBorder(),
-                              ),
+                              labelText: 'Email',
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Por favor, insira dado valido ';
+                                  return 'Por favor, insira dado válido!';
                                 }
                                 return null;
                               },
                               onSaved: (value) {
                                 _email.text = value ?? '';
-                              },
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          Card(
-                            color: Colors.purple,
-                            child: TextFormField(
+                              }),
+                          Push15(
                               controller: _telefone,
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                labelText: ' Telefone',
-                                labelStyle: TextStyle(
-                                    color: Colors.black, fontSize: 20),
-                                border: OutlineInputBorder(),
-                              ),
+                              keybord: TextInputType.number,
+                              labelText: 'Telefone',
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Por favor, insira dado valido ';
+                                  return 'Por favor, insira dado válido!';
                                 }
                                 return null;
                               },
                               onSaved: (value) {
                                 _telefone.text = value ?? '';
-                              },
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          Card(
-                            color: Colors.purple,
-                            child: TextFormField(
+                              }),
+                          Push15(
                               controller: _git,
-                              decoration: const InputDecoration(
-                                labelText: ' GitHub',
-                                labelStyle: TextStyle(
-                                    color: Colors.black, fontSize: 20),
-                                border: OutlineInputBorder(),
-                              ),
+                              labelText: 'GitHub',
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Por favor, insira dado valido ';
+                                  return 'Por favor, insira dado válido!';
                                 }
                                 return null;
                               },
                               onSaved: (value) {
                                 _git.text = value ?? '';
-                              },
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
+                              }),
                           Card(
                             //                                                                              <= tipo sanguineo
                             color: Colors.purple,
@@ -576,6 +480,11 @@ class _AddPessoasState extends State<AddPessoas> {
                                           // Adiciona a nova pessoa ao estadoListaDePessoas
                                           estadoListaDePessoas
                                               .incluir(novaPessoa);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const TelaInicial()));
                                         }
                                       },
                                       child: const Text('salvar')),
@@ -592,8 +501,8 @@ class _AddPessoasState extends State<AddPessoas> {
                                     onPressed: () {
                                       _nome.clear();
                                       _email.clear();
-                                      _telefone.clear();
                                       _git.clear();
+                                      _telefone.clear();
                                     },
                                     child: const Text('Excluir'),
                                   ),
@@ -608,5 +517,45 @@ class _AddPessoasState extends State<AddPessoas> {
                 );
               },
             )));
+  }
+}
+
+class Push15 extends StatelessWidget {
+  final TextEditingController? controller;
+  final String labelText;
+  final String? Function(String?) validator;
+  final void Function(String?)? onSaved;
+  final keybord;
+  final String? initialvalue;
+
+  const Push15({
+    super.key,
+    this.controller,
+    required this.labelText,
+    required this.validator,
+    this.onSaved,
+    this.keybord,
+    this.initialvalue,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.purple,
+      child: TextFormField(
+        initialValue: initialvalue,
+        controller: controller,
+        keyboardType: keybord,
+        decoration: InputDecoration(
+          errorStyle: TextStyle(color: Colors.amber[700], fontSize: 15),
+          labelText: labelText,
+          labelStyle: const TextStyle(color: Colors.black, fontSize: 20),
+          border: const OutlineInputBorder(),
+        ),
+        validator: validator,
+        onSaved: onSaved,
+        style: const TextStyle(color: Colors.white),
+      ),
+    );
   }
 }
